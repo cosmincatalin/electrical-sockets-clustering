@@ -34,6 +34,10 @@ distance <- dist(data %>% select(-country))
 
 shinyServer(function(input, output) {
   
+  output$dataStructure <- renderPrint({
+    str(raw)
+  })
+  
   output$worldmap <- renderPlot({
     fit <- hclust(distance, method = input$method)  
     data$cluster <- cutree(fit, k = input$clusters)
